@@ -22,7 +22,7 @@ MCP-сервер, через который AI-агент (Claude Code и т.п.
 ## Установка
 
 ```bash
-git clone <repo> ~/tg-reader && cd ~/tg-reader
+git clone https://github.com/agentseo/tg-reader ~/tg-reader && cd ~/tg-reader
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
@@ -80,4 +80,4 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 | `TG_SESSION`      | строка сессии (или вместо неё ↓)                      |
 | `TG_SESSION_FILE` | путь к файлу со строкой сессии                        |
 
-Как есть, без гарантий.
+Как есть, без гарантий. Лицензия MIT.
