@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.session
+.env
+downloads/
+.ruff_cache/
+tg-files/
+
+# личное владельца — не для репозитория
+profiles.toml
+AGENTS.md
+CLAUDE.md
+.larec.json

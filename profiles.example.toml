@@ -1,0 +1,7 @@
+# Скопируй в profiles.toml и впиши свои чаты.
+# Элемент chats — числовой id (из `python -m tg_reader.chats`), "@username" или точное название.
+# write = true разрешает агенту отправлять сообщения и файлы; по умолчанию только чтение.
+
+[profiles.myproject]
+chats = [-1001234567890, "@some_channel", "Точное название чата"]
+write = false
