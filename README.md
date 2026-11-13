@@ -27,6 +27,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
 1. **API-ключи.** <https://my.telegram.org/apps> → создать приложение → `api_id` и `api_hash`.
+   Форма выдаёт `ERROR`? См. [ниже](#mytelegramorg-выдаёт-error).
 2. **Вход** (QR-код в терминале; `--phone` — вход по коду из Telegram):
 
    ```bash
@@ -39,6 +40,37 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 3. **Найти чаты:** `TG_SESSION_FILE=~/.config/tg-reader/session .venv/bin/python -m tg_reader.chats "часть названия"`
    печатает `id<TAB>тип<TAB>название`.
 4. **Профиль:** `cp profiles.example.toml profiles.toml`, вписать id нужных чатов.
+
+## my.telegram.org выдаёт ERROR
+
+Частая беда при создании приложения на my.telegram.org: форма отвечает просто `ERROR`. Обычно
+причина в VPN (страна подключения не совпадает со страной номера). Без VPN из России сайт при
+этом не открывается. Помогает прямое подключение к серверу Telegram через файл `hosts`.
+
+**Выключи VPN и не включай, пока не получишь ключи.** Затем добавь в `hosts` строку
+
+```
+149.154.167.220 my.telegram.org
+```
+
+(`149.154.167.220` — адрес my.telegram.org в сети Telegram) и сбрось DNS-кэш:
+
+- **Windows:** Блокнот **от имени администратора** → открыть
+  `C:\Windows\System32\drivers\etc\hosts` (тип файлов «Все файлы») → дописать строку →
+  сохранить. Затем в cmd: `ipconfig /flushdns`.
+- **macOS:** `sudo nano /etc/hosts` → дописать строку → Ctrl+O, Enter, Ctrl+X. Затем
+  `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`.
+- **Linux:** `echo '149.154.167.220 my.telegram.org' | sudo tee -a /etc/hosts`.
+- **WSL:** браузер работает в Windows, поэтому править нужно `hosts` Windows (см. выше).
+
+Потом **полностью** закрой браузер (на Mac — Cmd+Q) и открой заново, зайди на
+<https://my.telegram.org>, войди по номеру и коду из Telegram → API development tools →
+заполни форму → появятся `api_id` и `api_hash`.
+
+- Всё равно не открывается — попробуй другой браузер (у браузера свой DNS-кэш), VPN по-прежнему
+  выключен.
+- Ещё вариант — прокси или VPN Казахстана (тоже код +7).
+- Получив ключи, строку из `hosts` можно удалить: она нужна только для этой формы.
 
 ## Подключение к проекту
 
